@@ -1,0 +1,30 @@
+<html>
+<head>
+
+<title>technex</title>
+</head>
+
+<body>
+	<h1>Categories</h1>
+	{% for c in categories %}
+	<li>{{c.category_title}}</li>
+	{% endfor %}
+
+	<br/>
+	<br/>
+	<h1>Posts</h1>
+	{% for p in posts %}
+	{{p.post_title}}<br/>
+	{{p.timestamp}}<br/>
+	{{p.author}}<br/>
+	{{p.post_content_short}}...<br/><br/><br/>
+	{% endfor %}
+	<br/><br/><br/>
+    
+    <h1>Recent Posts</h1>
+	{% for p in latest_post_list %}
+	{{p.post_title}}<br/>
+	{% endfor %}
+</body>
+</html>
+
