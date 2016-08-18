@@ -1,10 +1,14 @@
 from __future__ import unicode_literals
-
+from django.template.defaultfilters import slugify
 from django.db import models
 
 # Create your models here.
 class Category(models.Model):
     category_title=models.CharField(max_length=100)
+    slug=models.SlugField(null=True)
+    def save(self, *args, **kwargs):
+        self.slug=slugify(self.category_title)
+        super(Category, self).save(*args, **kwargs)
     def __unicode__(self):
         return self.category_title
 
@@ -17,6 +21,11 @@ class Post(models.Model):
     timestamp=models.DateTimeField(auto_now=False, auto_now_add=True)
     author= models.CharField(max_length=100)
     category=models.ForeignKey(Category)
+    slug=models.SlugField(null=True)
+    image=models.FileField(null=True, blank=True)
+    def save(self, *args, **kwargs):
+        self.slug=slugify(self.post_title)
+        super(Post, self).save(*args, **kwargs)
     def __unicode__(self):
         return self.post_title
 

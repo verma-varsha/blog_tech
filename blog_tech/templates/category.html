@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{category.category_title}}|Technex</title>
+</head>
+<body>
+<h1>{{category.category_title}}</h1>
+<br/>
+{% for p in posts %}
+<a href="/blog/{{p.slug}}">{{p.post_title}}</a><br/>
+{% endfor %}
+</body>
+</html>

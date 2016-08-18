@@ -1,4 +1,5 @@
 <html>
+
 <head>
 
 <title>technex</title>
@@ -7,7 +8,7 @@
 <body>
 	<h1>Categories</h1>
 	{% for c in categories %}
-	<li>{{c.category_title}}</li>
+	<li><a href="/blog/category/{{c.slug}}/">{{c.category_title}}</a></li>
 	{% endfor %}
 
 	<br/>
@@ -15,6 +16,7 @@
 	<h1>Posts</h1>
 	{% for p in posts %}
 	{{p.post_title}}<br/>
+    <img src="{{p.image.url}}"/>
 	{{p.timestamp}}<br/>
 	{{p.author}}<br/>
 	{{p.post_content_short}}...<br/><br/><br/>
@@ -23,7 +25,7 @@
     
     <h1>Recent Posts</h1>
 	{% for p in latest_post_list %}
-	{{p.post_title}}<br/>
+	<a href="/blog/{{p.slug}}/">{{p.post_title}}</a><br/>
 	{% endfor %}
 </body>
 </html>
