@@ -1,13 +1,175 @@
-<html>
-	<head>
-		<title>{{post.post_title}}|Technex</title>
-	</head>
-    <body>
-    	<h1>{{post.post_title}}</h1><br/><br/>
-    	{{post.post_content}}<br/>
 
-    	<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
-Facebook
-</a>
-    </body>
+<html>
+<head>
+<title>{{post.post_title}}|Technex</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<script> src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ 
+<script>
+$(function(){
+$('#active').slideDown(700);
+});
+$(function(){
+$('.btn2').slideDown(700);
+});
+$(function(){
+$('#btn1').on('click',function(){
+$(this).css({display:'none'});
+$('.subpost1').css({display:'none'});
+$('.subpost2').css({display:'none'});
+$('#subpost5').css({display:'block'});
+$('#btn12').css({display:'block'});
+
+});
+$('#btn12').on('click',function(){
+$(this).css({display:'none'});
+$('#subpost5').css({display:'none'});
+$('.subpost1').css({display:'block'});
+$('.subpost2').css({display:'block'});
+$('.subpost2').css({display:'block'});
+$('#btn1').css({display:'block'});
+});
+});
+
+$(document).ready(function(){
+    $(".comment_div").hide();
+   
+	$(".comment_btn").click(function(){
+		$(".comment_div").toggle();
+	});
+    
+});
+
+$(".read_comments_btn").click(function(){
+		$(".previous_comments").toggle();
+	});
+	});
+</script>
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["email"].value;
+    var atpos = x.indexOf("@");
+    var dotpos = x.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+        alert("Not a valid e-mail address");
+        return false;
+    }
+}
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="/static/javascript/script.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/blog_style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/poststyle.css">
+<link rel="stylesheet" type="text/css" href="/static/css/footer_style.css">
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+
+</head>
+<body class="body">
+<a name="top"></a>
+
+<div class="sidebar">
+
+<div id="category">
+  <h2 class="cate">CATEGORIES</h2>
+   <ul>
+	{% for c in categories %}
+	<li><a id="active" href="/blog/category/{{c.slug}}/">{{c.category_title}}</a></li>
+	{% endfor %}
+   </ul>
+ </div>
+ 
+ 
+ <div id="rposts">
+ <h2 class="recent">RECENT POSTS</h2>
+	{% for p in latest_post_list %}
+	<a href="/blog/{{p.slug}}/"><button type="button" class="btn2">{{p.post_title}}</button></a>
+	{% endfor %}
+ </div>
+ 
+ </div>
+ 
+
+
+
+
+
+
+
+<div id="post">
+	
+	<header>
+	<div id="title">{{post.post_title}}</div><br/><br/>
+	</header>
+	<br/>
+	<div class="post_content">
+	<span id="author"><b>Posted:</b>    {{post.timestamp}}
+	<br/>
+	<b>By:</b>   {{post.author}}</span>
+	<br/>
+	<br/>
+	<div class="image">
+	<img src="{{post.image.url}}" width="100%" height="100%"/>
+	</div>
+	<br/>
+	{{post.post_content}}<br/>
+	<br/><br/><br/>
+	<div id="subpost5"><center><button type="button" id="btn12">Back</button></center></div>
+	</div>
+	<!--sharing and commenting options-->
+	<div class="subpost3">
+	
+	
+	<div class="share_comment">
+
+
+   <!-- Facebook Share Button -->
+        <a class="fbtn_share_facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><i class="fa fa-facebook-square" style="font-size:24px"></i></a> 
+   <!-- Twitter Share Button -->
+        <a class="fbtn_share_twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs"><i class="fa fa-twitter" style="font-size:24px"></i></a> 
+   <!-- Pinterest Share Button -->
+        <a class="fbtn_share_pinterest" href="http://pinterest.com/pin/create/button/?url=url&amp;description=data&amp;media=image"><i class="fa fa-pinterest" style="font-size:24px"></i></a>
+    <!-- comment button -->
+	
+	<button type="button" class="btn btn-info btn-sm comment_btn"><span class="glyphicon glyphicon-comment"></span> COMMENT</button>
+	<button type="button" class="btn btn-info btn-sm read_comments_btn">Read Comments</button>
+	<br>
+ <div class="comment_div">
+   <form name="myForm" action="demo_form.asp" onsubmit="return validateForm();" method="post">
+    <label for="name">Name:</label> <input type='text' name='name' id='name' />
+    <label for="email">Email-Id:</label> <input type="text" name="email"><br />
+    Comment:<br />
+    <textarea name='comment' id='comment'></textarea>
+    <input type="submit" value="Submit">
+   </form>
+ </div>
+
+  <div class="previous_comments">
+  <!--previous comments-->
+  </div> 
+		
+</div>
+
+</div>
+</div>
+
+<!--to go to top-->
+<div class="go_to_top"><a href="#top"><span class="glyphicons glyphicons-chevron-up" style="color:white"></span></a></div>
+
+<!-- bootstrab files inclusion -->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+ </body>
 </html>

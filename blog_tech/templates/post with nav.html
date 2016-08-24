@@ -1,7 +1,10 @@
 
 <html>
 <head>
+<title>{{post.post_title}}|Technex</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 <script> src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
  
 <script>
@@ -29,6 +32,7 @@ $('.subpost2').css({display:'block'});
 $('#btn1').css({display:'block'});
 });
 });
+
 $(document).ready(function(){
     $(".comment_div").hide();
    
@@ -55,9 +59,13 @@ function validateForm() {
 }
 </script>
 
-<link rel="stylesheet" type="text/css" href="/static/css/blog_style.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="/static/javascript/script.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/poststyle.css">
+<script type="text/javascript" src="/static/javascript/slidenav_script.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/slidenav_style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/blog_style.css">
 <link rel="stylesheet" type="text/css" href="/static/css/footer_style.css">
 
 <!-- Latest compiled and minified CSS -->
@@ -68,8 +76,11 @@ function validateForm() {
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 
+
 </head>
 <body class="body">
+<a name="top"></a>
+
 <div class="sidebar">
 
 <div id="category">
@@ -90,31 +101,60 @@ function validateForm() {
  </div>
  
  </div>
+ 
+<!-- side navigation bar for mobile -->
+<span class="openbtn"  onclick="openNav1()">&#9776; C</span>
+<div id="categorySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
+ <div id="category" style="width:100%">
+  <h2 class="cate">CATEGORIES</h2>
+   <ul>
+	{% for c in categories %}
+	<li><a id="active" href="/blog/category/{{c.slug}}/">{{c.category_title}}</a></li>
+	{% endfor %}
+   </ul>
+ </div>
+</div>
 
+<span class="openbtn" onclick="openNav2()">&#9776; R</span>
+<div id="recentSidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
+ <div id="rposts" style="width:100%">
+ <h2 class="recent">RECENT POSTS</h2>
+	{% for p in latest_post_list %}<br/>
+	<a href="/blog/{{p.slug}}/"><button type="button" class="btn2">{{p.post_title}}</button></a>
+	{% endfor %}
+ </div>
+</div> 
+ 
  
 
 
 
 
-{% for p in posts %}
 
 
-
-<div id="posts">
+<div id="post">
 	
 	<header>
-	<span class="post_title">{{p.post_title}}</span>
-	<span class="date">{{p.timestamp}}</span>
+	<div id="title">{{post.post_title}}</div><br/><br/>
 	</header>
 	<br/>
-	
-	<div class="subpost1">
-	<div class="subpost4">
-	{{p.post_content_short}}...</div>
-	<a href="/blog/{{p.slug}}/"><button type="button" id="btn1">Read more</button></div></a>
-	<div class="subpost2"> <img id="post_image" src="{{p.image.url}}"/></div>
+	<div class="post_content">
+	<span id="author"><b>Posted:</b>    {{post.timestamp}}
+	<br/>
+	<b>By:</b>   {{post.author}}</span>
+	<br/>
+	<br/>
+	<div class="image">
+	<img src="{{post.image.url}}" width="100%" height="100%"/>
+	</div>
+	<br/>
+	{{post.post_content}}<br/>
+	<br/><br/><br/>
 	<div id="subpost5"><center><button type="button" id="btn12">Back</button></center></div>
-	
+	</div>
+	<!--sharing and commenting options-->
 	<div class="subpost3">
 	
 	
@@ -133,36 +173,30 @@ function validateForm() {
 	<button type="button" class="btn btn-info btn-sm read_comments_btn">Read Comments</button>
 	<br>
  <div class="comment_div">
- <form name="myForm" action="demo_form.asp" onsubmit="return validateForm();" method="post">
-  <label for="name">Name:</label> <input type='text' name='name' id='name' />
-  <label for="email">Email-Id:</label> <input type="text" name="email"><br />
-  Comment:<br />
-  <textarea name='comment' id='comment'></textarea>
-  <input type="submit" value="Submit">
-</form>
-</div>
+   <form name="myForm" action="demo_form.asp" onsubmit="return validateForm();" method="post">
+    <label for="name">Name:</label> <input type='text' name='name' id='name' />
+    <label for="email">Email-Id:</label> <input type="text" name="email"><br />
+    Comment:<br />
+    <textarea name='comment' id='comment'></textarea>
+    <input type="submit" value="Submit">
+   </form>
+ </div>
 
   <div class="previous_comments">
-  
- </div> 
-	<!--previous comments-->	
+  <!--previous comments-->
+  </div> 
+		
+</div>
+
+</div>
 </div>
 
 <!--to go to top-->
-<a name="top"></a>
 <div class="go_to_top"><a href="#top"><span class="glyphicons glyphicons-chevron-up"></span></a></div>
 
 <!-- bootstrab files inclusion -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	</div>
 	
-	
-</div>
- 
- {% endfor %}
-
- 
- 
  </body>
 </html>

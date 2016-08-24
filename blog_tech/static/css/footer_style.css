@@ -1,0 +1,52 @@
+.share_comment
+{
+	
+	width:100%;
+	height:wrap-content;
+	background-color:white;
+	padding:5px;
+}
+
+
+#comment{
+	width:80%;
+	height:wrap-content;
+	margin:5px;
+}
+
+}
+button.comment_btn{
+	margin:5px 20px 5px 5px;
+}
+
+div.comment_div{
+	border:3px;
+	border-radius:5px;
+	border-color:blue;
+	width:90%;
+	margin:15px;
+	background-color:#188BC2;
+	padding:5px;
+}
+
+button.post{
+	margin:5px 5px 15px 5px;
+	
+}
+
+
+button.read_comments_btn{
+	float:right;
+	display:inline;
+    margin:5px 20px 5px 5px;
+}
+
+a.fbtn_share_facebook{
+	margin:5px 5px 5px 20px;
+}
+a.fbtn_share_twitter{
+	margin:5px;
+}
+a.fbtn_share_pinterest{
+	margin:5px 20px 5px 5px;
+}

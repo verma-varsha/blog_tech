@@ -1,0 +1,32 @@
+.post.mobile{
+width:93%;
+
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+	float:right;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 10px;
+}
+.openbtn{
+font-size:30px;
+cursor:pointer;
+display:block;
+}
+#categorySidenav{
+	margin-top:10%;
+}
