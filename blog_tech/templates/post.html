@@ -146,7 +146,8 @@ function validateForm() {
 	<button type="button" class="btn btn-info btn-sm read_comments_btn">Read Comments</button>
 	<br>
  <div class="comment_div">
-   <form name="myForm" action="demo_form.asp" onsubmit="return validateForm();" method="post">
+   <form name="myForm" action="/blog/{{post.slug}}/" onsubmit="return validateForm();" method="post">
+   {% csrf_token %}
     <label for="name">Name:</label> <input type='text' name='name' id='name' />
     <label for="email">Email-Id:</label> <input type="text" name="email"><br />
     Comment:<br />
@@ -157,6 +158,11 @@ function validateForm() {
 
   <div class="previous_comments">
   <!--previous comments-->
+  {% for c in comments %}
+  {{c.user_name}}<br/>
+  {{c.user_email}}<br/>
+  {{c.user_comment}}<br/><br/>
+  {% endfor %}
   </div> 
 		
 </div>
